@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link id="theme" rel="stylesheet" type="text/css" href="style.css">
+
+  <title>Browser extensions manager UI</title>
+
+</head>
+
+<body>
+
+  <main class="main">
+
+    <header class="head">
+      <img src="assets/images/logo.svg" class="ex_ic">
+      <div class="tg_div">
+        <img src="assets/images/icon-sun.svg" alt="sun_logo" width="20" height="20" />
+      </div>
+    </header>
+
+    <section class="mid_layer">
+      <h1 class="ext">Extensions List</h1>
+      <section class="switch_layout">
+        <button class="switch_btn">All</button>
+        <button class="switch_btn">Active</button>
+        <button class="switch_btn">Inactive</button>
+      </section>
+    </section>
+    <section class="ext_cnt">
+      <article class="ext_card" data-active="false">
+        <header class="ext_head">
+          <img class="ext_ic" src="assets/images/logo-devlens.svg" alt="devlense" draggable="false" />
+          <div class="ext_cntnt_holder">
+            <h2 class="ext_name">Devlense</h2>
+            <p class="ext_des">
+              Quickly insect page layouts
+              and visualize element boundary
+            </p>
+          </div>
+        </header>
+        <div class="ext_foot">
+          <button class="rm_btn" type="button">Remove</button>
+          <div class="tg_on_off">
+            <div class="tg_ctr"></div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+
+    const card = document.querySelector('.ext_card');
+    const cardHolder = document.querySelector('.ext_cnt');
+    const act_btn = document.querySelectorAll('.switch_btn')
+    let cards = [];
+    function createCard(amount) {
+      for (let i = 0; i < amount; i += 1) {
+        let newCard = card.cloneNode(true);
+        newCard.setAttribute('class', 'ext_card');
+        newCard.id = "card_" + i;
+        cards.push(newCard);
+        cardHolder.appendChild(newCard);
+      }
+    }
+    createCard(12);
+    card.remove();
+
+    //names of extensions
+    let exData = [
+      {
+        "name": "Devlense",
+        "ic": "assets/images/logo-devlens.svg",
+        "des": "Quickly inspect page layout and visualize page boundary."
+      },
+      {
+        "name": "StyleSpy",
+        "ic": "assets/images/logo-style-spy.svg",
+        "des": "Instantly analyze and copy CSS from any webpage element."
+      },
+      {
+        "name": "SpeedBoast",
+        "ic": "assets/images/logo-speed-boost.svg",
+        "des": "Optimize browser resource usage to accelerate page loading."
+      },
+      {
+        "name": "JsonWizard",
+        "ic": "assets/images/logo-json-wizard.svg",
+        "des": "Formats, Validate, Prettifies, JSON responses in browsers."
+      },
+      {
+        "name": "TabMaster Pro",
+        "ic": "assets/images/logo-tab-master-pro.svg",
+        "des": "Organize browsers tab into group and session."
+      },
+      {
+        "name": "ViewportBuddy",
+        "ic": "assets/images/logo-viewport-buddy.svg",
+        "des": "Simulates various screen resolutions directly within the browser."
+      },
+      {
+        "name": "MarkUp Note",
+        "ic": "assets/images/logo-markup-notes.svg",
+        "des": "Enable anotations and note directly onto webpages for collaborative debugging."
+      },
+      {
+        "name": "GridGuides",
+        "ic": "assets/images/logo-link-checker.svg",
+        "des": "Overlay customize grids and alignment guids on webpage."
+      },
+      {
+        "name": "Palette Picker",
+        "ic": "assets/images/logo-palette-picker.svg",
+        "des": "Instantly extract color palletes from any webpage"
+      },
+      {
+        "name": "linkChecker",
+        "ic": "assets/images/logo-link-checker.svg",
+        "des": "Scans and highlight broken links on any page."
+      },
+      {
+        "name": "DOM Snapshot",
+        "ic": "assets/images/logo-dom-snapshot.svg",
+        "des": "Capture and export DOM sstructure quickly."
+      },
+      {
+        "name": "ConsolePlus",
+        "ic": "assets/images/logo-console-plus.svg",
+        "des": "Enhance developer console with advance filtering and logging."
+      }
+    ];
+
+    const rm_btn = document.querySelectorAll('.rm_btn'); //The remove btn
+    const extName = document.querySelectorAll('.ext_name'); //Extenions name
+    const exIcon = document.querySelectorAll(".ext_ic"); //extentions ic
+    const exDes = document.querySelectorAll(".ext_des"); //extentions description
+    const tg_btn = document.querySelectorAll(".tg_ctr"); //the toggle btn contoller
+    const tg_cnt = document.querySelectorAll(".tg_on_off"); //The toggle container
+    const tgdiv = document.querySelector(".tg_div"); //toggle btn to toggle between light and dark mode
+
+    //action to remove extention
+    rm_btn.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        btn.style.backgroundColor = "hsl(3, 71%, 56%)";
+        e.target.parentElement.parentElement.remove();
+      });
+    });
+
+    //naming the extensions
+    extName.forEach((name, index) => {
+      name.innerText = exData[index].name;
+      exIcon[index].src = exData[index].ic;
+      exDes[index].innerText = exData[index].des;
+    });
+
+    //<--action to perform on and off toggle-->
+    tg_btn.forEach((btn, i) => {
+      btn.addEventListener('click', (e) => {
+        if (tg_cnt[i].style.backgroundColor == "") {
+          tg_cnt[i].style.backgroundColor = "hsl(3, 86%, 64%)";
+          btn.style.marginInlineStart = "auto";
+          cards[i].dataset.active = "false";
+
+          if (cards[i].dataset.active == "false") {
+            cards[i].dataset.active = "true";
+          };
+        }
+        else {
+          tg_cnt[i].style.backgroundColor = "";
+          btn.style.marginInlineStart = "";
+          if (cards[i].dataset.active == "true") {
+            cards[i].dataset.active = "false";
+          };
+        };
+      });
+    });
+
+    //<--Reset function to reset colors on btn-->
+    function reset_btn(index) {
+      let activeColor = "hsl(3, 77%, 44%)";
+      try {
+        if (index > 2) {
+          throw ("Index out of range. max: 2");
+        }
+        if (index == 0) {
+          act_btn[0].style.backgroundColor = activeColor;
+          act_btn[1].style.backgroundColor = "";
+          act_btn[2].style.backgroundColor = "";
+        }
+        else if (index == 1) {
+          act_btn[0].style.backgroundColor = "";
+          act_btn[1].style.backgroundColor = activeColor;
+          act_btn[2].style.backgroundColor = "";
+        }
+        else if (index == 2) {
+          act_btn[0].style.backgroundColor = "";
+          act_btn[1].style.backgroundColor = "";
+          act_btn[2].style.backgroundColor = activeColor;
+        }
+      } catch (v) {
+        console.error(v);
+      };
+    };
+
+    //<--To filter extensions between all, active and inactive-->
+    function filter() {
+
+      //<--for all-->
+      act_btn[0].addEventListener('click', () => {
+        reset_btn(0);
+        for (let i = 0; i < cards.length; i += 1) {
+          cards[i].style.display = "";
+        }
+      });
+
+      //<--for active extention-->
+      act_btn[1].addEventListener('click', () => {
+        reset_btn(1);
+        for (let i = 0; i < cards.length; i += 1) {
+          if (cards[i].dataset.active === "false") {
+            cards[i].style.display = "none";
+          } else {
+            cards[i].style.display = "";
+          };
+        };
+      });
+
+      //for inactive extention
+      act_btn[2].addEventListener('click', () => {
+        reset_btn(2);
+        for (let i = 0; i < cards.length; i += 1) {
+          if (cards[i].dataset.active === "true") {
+            cards[i].style.display = "none";
+          } else {
+            cards[i].style.display = "";
+          }
+        }
+      });
+    };
+    filter();
+
+    //<--user theme action and function-->
+    //<--save theme-->
+    /**
+     * @param {string} path - path to the theme
+     */
+    function saveTheme(path) {
+      localStorage.setItem("theme_path", path);
+    }
+    const theme = document.getElementById("theme");
+    let themePath = theme.href;
+
+    //<--Function to load user prefered theme-->
+    function getPreferedTheme() {
+      preferedTheme = localStorage.getItem("theme_path");
+      theme.setAttribute('href', preferedTheme);
+    }
+
+    //<--A function to check if user theme was saved.-->
+    function themeChecker() {
+      let saveTheme = localStorage.getItem("theme_path");
+      if (saveTheme) {
+        getPreferedTheme();
+      } else {
+        saveTheme(themePath);
+        getPreferedTheme();
+      };
+    };
+    themeChecker();
+
+    //<--changeTheme function: To toggle between light mode and dark mode-->
+    function changeTheme() {
+
+      const theme = document.getElementById("theme");
+      const domain = window.location.hostname;
+      const ptc = window.location.protocol;
+      const port = window.location.port;
+
+      if (theme.href == ptc + "//" + domain + ":" + port + "/style.css") {
+        theme.setAttribute("href", `${ptc}//${domain}:${port}/style_light.css`);
+        saveTheme(theme.href);
+        tgdiv.children[0].src = "assets/images/icon-moon.svg";
+      } else {
+        theme.setAttribute("href", `${ptc}//${domain}:${port}/style.css`);
+        saveTheme(theme.href);
+        
+        tgdiv.children[0].src = "assets/images/icon-sun.svg";
+      }
+    }
+    //<--action to perform the theme toggle-->
+    tgdiv.addEventListener('click', () => {
+      changeTheme();
+    });
+
+  </script>
+</body>
+
+</html>
