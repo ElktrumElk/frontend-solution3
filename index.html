@@ -254,7 +254,7 @@
       localStorage.setItem("theme_path", path);
     }
     const theme = document.getElementById("theme");
-    let themePath = theme.href;
+    let themePath = theme.getAttribute('href');
 
     //<--Function to load user prefered theme-->
     function getPreferedTheme() {
@@ -280,15 +280,15 @@
       const theme = document.getElementById("theme");
       const currentHref = theme.getAttribute('href');
 
-      if (currentHref == "style.css") {
-        theme.setAttribute("href", "style_light.css");
+      if (currentHref == "/style.css") {
+        theme.setAttribute("href", "/style_light.css");
         saveTheme('style_light.css');
-        tgdiv.children[0].src = "assets/images/icon-moon.svg";
+        tgdiv.children[0].src = "/assets/images/icon-moon.svg";
       } else {
-        theme.setAttribute("href", "style.css");
+        theme.setAttribute("href", "/style.css");
         saveTheme('style.css');
         
-        tgdiv.children[0].src = "assets/images/icon-sun.svg";
+        tgdiv.children[0].src = "/assets/images/icon-sun.svg";
       }
     }
     //<--action to perform the theme toggle-->
