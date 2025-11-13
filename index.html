@@ -282,12 +282,13 @@
       const ptc = window.location.protocol;
       const port = window.location.port;
 
-      if (theme.href == ptc + "//" + domain + ":" + port + "/style.css") {
-        theme.setAttribute("href", `${ptc}//${domain}:${port}/style_light.css`);
+      if (theme.href == ptc + "//" + domain + "/style.css") {
+        theme.setAttribute("href", `${ptc}//${domain}/style_light.css`);
         saveTheme(theme.href);
         tgdiv.children[0].src = "assets/images/icon-moon.svg";
+        
       } else {
-        theme.setAttribute("href", `${ptc}//${domain}:${port}/style.css`);
+        theme.setAttribute("href", `${ptc}//${domain}/style.css`);
         saveTheme(theme.href);
         
         tgdiv.children[0].src = "assets/images/icon-sun.svg";
