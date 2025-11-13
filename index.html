@@ -264,8 +264,8 @@
 
     //<--A function to check if user theme was saved.-->
     function themeChecker() {
-      let savetheme = localStorage.getItem("theme_path");
-      if (savetheme) {
+      let save = localStorage.getItem("theme_path");
+      if (save) {
         getPreferedTheme();
       } else {
         saveTheme(themePath);
