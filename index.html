@@ -278,18 +278,15 @@
     function changeTheme() {
 
       const theme = document.getElementById("theme");
-      const domain = window.location.hostname;
-      const ptc = window.location.protocol;
-      const port = window.location.port;
+      const currentHref = theme.getAttribute('href');
 
-      if (theme.href == ptc + "//" + domain + "/style.css") {
-        theme.setAttribute("href", `${ptc}//${domain}/style_light.css`);
-        saveTheme(theme.href);
+      if (currentHref == "style.css") {
+        theme.setAttribute("href", "style_light.css");
+        saveTheme('style_light.css');
         tgdiv.children[0].src = "assets/images/icon-moon.svg";
-        console.log(ptc+"//"+domain+"/style_light.css")
       } else {
-        theme.setAttribute("href", `${ptc}//${domain}/style.css`);
-        saveTheme(theme.href);
+        theme.setAttribute("href", "style.css");
+        saveTheme('style.css');
         
         tgdiv.children[0].src = "assets/images/icon-sun.svg";
       }
