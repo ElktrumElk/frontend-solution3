@@ -7,7 +7,8 @@
   <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link id="theme" rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="./styles/style.css" id="theme">
+  <!-- <link id="theme" rel="stylesheet" type="text/css" href="./styles/style.css"> -->
 
   <title>Browser extensions manager UI</title>
 
@@ -280,15 +281,15 @@
       const theme = document.getElementById("theme");
       const currentHref = theme.getAttribute('href');
 
-      if (currentHref == "/style.css") {
-        theme.setAttribute("href", "/style_light.css");
+      if (currentHref == "./styles/style.css") {
+        theme.setAttribute("href", "./styles/style_light.css");
         saveTheme('style_light.css');
-        tgdiv.children[0].src = "/assets/images/icon-moon.svg";
+        tgdiv.children[0].src = "./assets/images/icon-moon.svg";
       } else {
-        theme.setAttribute("href", "/style.css");
-        saveTheme('style.css');
+        theme.setAttribute("href", "./styles/style.css");
+        saveTheme('./styles/style.css');
         
-        tgdiv.children[0].src = "/assets/images/icon-sun.svg";
+        tgdiv.children[0].src = "./assets/images/icon-sun.svg";
       }
     }
     //<--action to perform the theme toggle-->
